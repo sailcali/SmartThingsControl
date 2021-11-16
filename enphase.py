@@ -26,7 +26,7 @@ def get_production_data_from_previous_week():
     body = response.json()
     devices = body.get('total_devices')
     for m in range(devices):
-        for interval in body.get('meter_intervals')[m].get('intervals'):
+        for interval in body['meter_intervals'][m]['intervals']:
             if interval['channel'] != 1:
                 break
             data = data.append({'end_time': datetime.fromtimestamp(interval['end_at']), 'production': interval['curr_w']}, ignore_index=True)
@@ -34,3 +34,4 @@ def get_production_data_from_previous_week():
 
 if __name__ == '__main__':
     weekly_production = get_production_data_from_previous_week()
+    print(weekly_production)
